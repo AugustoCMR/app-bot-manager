@@ -1,3 +1,4 @@
+
 import { useId } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -8,18 +9,19 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export default function LoginModal() {
-  const id = useId()
+type LoginModalProps = {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+};
+
+export default function LoginModal({ open = true, onOpenChange }: LoginModalProps) {
+  const id = useId();
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Sign in</Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <div className="flex flex-col items-center gap-2">
           <div
@@ -38,9 +40,9 @@ export default function LoginModal() {
             </svg>
           </div>
           <DialogHeader>
-            <DialogTitle className="sm:text-center">Welcome back</DialogTitle>
+            <DialogTitle className="sm:text-center">Bem-vindo!</DialogTitle>
             <DialogDescription className="sm:text-center">
-              Enter your credentials to login to your account.
+              Insira suas credenciais para acessar sua conta.
             </DialogDescription>
           </DialogHeader>
         </div>
@@ -48,49 +50,35 @@ export default function LoginModal() {
         <form className="space-y-5">
           <div className="space-y-4">
             <div className="*:not-first:mt-2">
-              <Label htmlFor={`${id}-email`}>Email</Label>
+              <Label htmlFor={`${id}-name`}>Usuário</Label>
               <Input
-                id={`${id}-email`}
-                placeholder="hi@yourcompany.com"
+                id={`${id}-name`}
+                placeholder="Insira seu usuário"
                 type="email"
                 required
               />
             </div>
             <div className="*:not-first:mt-2">
-              <Label htmlFor={`${id}-password`}>Password</Label>
+              <Label htmlFor={`${id}-password`}>Senha</Label>
               <Input
                 id={`${id}-password`}
-                placeholder="Enter your password"
+                placeholder="Insira sua senha"
                 type="password"
                 required
               />
             </div>
           </div>
-          <div className="flex justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <Checkbox id={`${id}-remember`} />
-              <Label
-                htmlFor={`${id}-remember`}
-                className="text-muted-foreground font-normal"
-              >
-                Remember me
-              </Label>
-            </div>
-            <a className="text-sm underline hover:no-underline" href="#">
-              Forgot password?
-            </a>
-          </div>
-          <Button type="button" className="w-full">
-            Sign in
+          <Button type="button" className="w-full cursor-pointer">
+            Entrar
           </Button>
         </form>
 
         <div className="before:bg-border after:bg-border flex items-center gap-3 before:h-px before:flex-1 after:h-px after:flex-1">
-          <span className="text-muted-foreground text-xs">Or</span>
+          <span className="text-muted-foreground text-xs">Ou</span>
         </div>
 
-        <Button variant="outline">Login with Google</Button>
+        <Button variant="outline" className="cursor-pointer">Criar sua conta</Button>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
