@@ -6,7 +6,7 @@ interface Props {
 
 export const Background = ({children}: Props) => {
   return (
-    <div className='bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-700 w-screen h-screen'>
+    <div className='w-screen h-screen bg-zinc-900'>
       {children}
     </div>
   )
