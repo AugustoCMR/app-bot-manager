@@ -1,12 +1,28 @@
+import React from "react";
+import Modal from "./Modal"
+import { UploadAndSendModal } from "./UploadAndSendModal";
+
 export const CardBot = () => {
+
+  const [useModal, setUseModal] = React.useState(false);
+
   return (
-    <div className="border border-zinc-50/50 h-[200px] bg-zinc-800/50 rounded-lg flex flex-col cursor-pointer hover:bg-zinc-700/50 transition hover:scale-102">
-      <div className="p-3 text-zinc-50 font-bold">
-        Titulo
+    <>
+      <div
+        className="border border-zinc-50/50 h-[200px] bg-zinc-800/50 rounded-lg flex flex-col 
+    cursor-pointer hover:bg-zinc-700/50 transition hover:scale-102"
+        onClick={() => setUseModal(true)}
+      >
+        <div className="p-3 text-zinc-50 font-bold">
+          Titulo
+        </div>
+        <div className="p-3 text-zinc-50 font-bold mt-auto">
+          Status
+        </div>
       </div>
-      <div className="p-3 text-zinc-50 font-bold mt-auto">
-        Status
-      </div>
-    </div>
+      <Modal open={useModal} onOpenChange={setUseModal}>
+        <UploadAndSendModal></UploadAndSendModal>
+      </Modal>
+    </>
   )
 }
